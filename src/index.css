@@ -1,8 +1,86 @@
 body {
   margin: 0px 30px;
+  background-color: rgb(30, 30, 30);
+  color: white;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Button */
+button {
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  transition: all 0.2s ease-out;
+  width: 100%;
+  background-color: rgb(0, 80, 201);
+}
+
+button:hover {
+  transform: scale(1.025);
+}
+
+.primary {
+  background-color: rgb(0, 118, 0);
+}
+
+.secondary {
+  background-color: rgb(97, 97, 97);
+}
+
+.danger {
+  background-color: rgb(128, 0, 0);
+}
+
+.buttons-div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* List */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.list-cell {
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  transition: all 0.2s ease-out;
+}
+
+.list-cell:hover {
+  border: 1.5px solid white;
+  transform: scale(1.01);
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input {
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  color: white;
+  background-color: rgb(30, 30, 30);
+  font-size: 16px;
 }
