@@ -5,21 +5,25 @@ import { getAuth, signOut } from 'firebase/auth';
 import Button from '../../components/Button/Button';
 import ButtonsDiv from '../../components/Button/ButtonsDiv';
 import ListCell from '../../components/List/ListCell';
+import axios from 'axios';
 
 const SharedLists = () => {
   const history = useHistory();
 
   const auth = getAuth();
 
-  const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState({ listID: { listName: 'List Name' } });
 
-  useEffect(() => {
-    setLists([
-      { id: '1', listName: 'UwU' },
-      { id: '2', listName: 'AwA' },
-      { id: '3', listName: 'OwO' },
-    ]);
-  }, []);
+  useEffect(
+    () =>
+      axios
+        .get('https://sharedlist-d718d-default-rtdb.firebaseio.com/lists.json')
+        .then((result) => {
+          setLists(result.data);
+        })
+        .catch((error) => console.log(error)),
+    [],
+  );
 
   const logout = async () => {
     await signOut(auth)
@@ -47,13 +51,13 @@ const SharedLists = () => {
         </Button>
       </ButtonsDiv>
       <div className='list'>
-        {lists.map((listElement, index) => {
+        {Object.keys(lists ?? {}).map((listElement, index) => {
           return (
             <ListCell
-              key={`list-element-${listElement.text}-${index}`}
-              onClick={() => goToList(listElement.id)}
+              key={`list-element-${lists[listElement].listName}-${index}`}
+              onClick={() => goToList(listElement)}
             >
-              {listElement.listName}
+              {lists[listElement].listName}
             </ListCell>
           );
         })}

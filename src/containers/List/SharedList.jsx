@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
@@ -8,17 +9,20 @@ import ListCell from '../../components/List/ListCell';
 const SharedList = () => {
   const history = useHistory();
 
-  const [list, setList] = useState([]);
+  const [listData, setListData] = useState({ listName: '', list: [] });
 
   const { listId } = useParams();
 
   useEffect(() => {
-    setList([
-      { id: '1', title: 'Element 1' },
-      { id: '2', title: 'Element 2' },
-      { id: '3', title: 'Element 3' },
-    ]);
-  }, []);
+    axios
+      .get(
+        `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+      )
+      .then((result) => {
+        setListData({ ...result.data, list: result.data.list ?? [] });
+      })
+      .catch((error) => console.log(error));
+  }, [listId]);
 
   const goToElement = (elementId) => {
     history.push(`/list/${listId}/element/${elementId}`);
@@ -30,12 +34,15 @@ const SharedList = () => {
 
   return (
     <div>
-      <h1>List</h1>
-      <h1>{list.listName}</h1>
-      <p className='list-id' onClick={copyToClipboard}>
+      <h1>List - {listData.listName}</h1>
+      <p
+        className='list-id'
+        onClick={copyToClipboard}
+        style={{ lineHeight: '1.25' }}
+      >
         Click to copy ID
         <br />
-        {listId}
+        <strong>{listId}</strong>
       </p>
       <ButtonsDiv>
         <Button
@@ -52,7 +59,7 @@ const SharedList = () => {
         </Button>
       </ButtonsDiv>
       <div className='list'>
-        {list.map((listElement, index) => (
+        {listData.list.map((listElement, index) => (
           <ListCell
             key={`list-element-${listElement.title}-${index}`}
             onClick={() => goToElement(listElement.id)}

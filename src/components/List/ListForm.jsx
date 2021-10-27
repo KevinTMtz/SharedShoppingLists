@@ -16,7 +16,12 @@ const ListForm = (props) => {
         await props.onSubmit();
       }}
     >
-      <input placeholder='List name' required />
+      <input
+        placeholder='List name'
+        required
+        value={props.value}
+        onChange={(event) => props.setListName(event.target.value)}
+      />
       <ButtonsDiv>
         <Button type='submit'>
           {props.isCreating ? 'Create' : 'Update'} list
