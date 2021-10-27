@@ -44,7 +44,7 @@ const SharedLists = () => {
       <h1>Shared Lists</h1>
       <ButtonsDiv>
         <Button onClick={() => history.push('/create-list')}>
-          Create list
+          Create or Add list
         </Button>
         <Button className='danger' onClick={logout}>
           Sing out

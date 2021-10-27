@@ -17,14 +17,18 @@ const ListForm = (props) => {
       }}
     >
       <input
-        placeholder='List name'
+        placeholder={props.inputPlaceHolder ?? 'List name'}
         required
         value={props.listName}
         onChange={(event) => props.setListName(event.target.value)}
       />
       <ButtonsDiv>
         <Button type='submit'>
-          {props.isCreating ? 'Create list' : 'Update list name'}
+          {props.isCreating
+            ? props.inputPlaceHolder
+              ? 'Add list'
+              : 'Create list'
+            : 'Update list name'}
         </Button>
         {props.isCreating ? (
           <Button className='secondary' onClick={() => history.push('/')}>
