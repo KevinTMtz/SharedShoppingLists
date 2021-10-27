@@ -30,7 +30,7 @@ const SharedList = () => {
 
   return (
     <div>
-      <h1>{'List'}</h1>
+      <h1>List</h1>
       <h1>{list.listName}</h1>
       <p className='list-id' onClick={copyToClipboard}>
         Click to copy ID
@@ -39,7 +39,7 @@ const SharedList = () => {
       </p>
       <ButtonsDiv>
         <Button
-          type='primary'
+          className='primary'
           onClick={() => history.push(`/edit-list/${listId}`)}
         >
           Edit list
@@ -47,7 +47,7 @@ const SharedList = () => {
         <Button onClick={() => history.push(`/list/${listId}/create-element`)}>
           Create element
         </Button>
-        <Button type='secondary' onClick={() => history.push('/')}>
+        <Button className='secondary' onClick={() => history.push('/')}>
           Return home
         </Button>
       </ButtonsDiv>

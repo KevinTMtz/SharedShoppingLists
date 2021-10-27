@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { getAuth, signOut } from 'firebase/auth';
 
 import Button from '../../components/Button/Button';
 import ButtonsDiv from '../../components/Button/ButtonsDiv';
@@ -7,6 +8,8 @@ import ListCell from '../../components/List/ListCell';
 
 const SharedLists = () => {
   const history = useHistory();
+
+  const auth = getAuth();
 
   const [lists, setLists] = useState([]);
 
@@ -18,6 +21,16 @@ const SharedLists = () => {
     ]);
   }, []);
 
+  const logout = async () => {
+    await signOut(auth)
+      .then(() => {
+        console.log('Sign out successful');
+      })
+      .catch((error) => {
+        console.log('Could not sign out');
+      });
+  };
+
   const goToList = (listId) => {
     history.push(`/list/${listId}`);
   };
@@ -28,6 +41,9 @@ const SharedLists = () => {
       <ButtonsDiv>
         <Button onClick={() => history.push('/create-list')}>
           Create list
+        </Button>
+        <Button className='danger' onClick={logout}>
+          Sing out
         </Button>
       </ButtonsDiv>
       <div className='list'>

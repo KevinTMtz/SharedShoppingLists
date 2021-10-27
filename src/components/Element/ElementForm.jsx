@@ -27,7 +27,7 @@ const ElementForm = (props) => {
           {props.isCreating ? 'Create' : 'Update'} element
         </Button>
         <Button
-          type='secondary'
+          className='secondary'
           onClick={() => history.push(`/list/${listId}`)}
         >
           Cancel {props.isCreating ? 'create' : 'update'} element

@@ -22,12 +22,12 @@ const ListForm = (props) => {
           {props.isCreating ? 'Create' : 'Update'} list
         </Button>
         {props.isCreating ? (
-          <Button type='secondary' onClick={() => history.push('/')}>
+          <Button className='secondary' onClick={() => history.push('/')}>
             Return home
           </Button>
         ) : (
           <Button
-            type='secondary'
+            className='secondary'
             onClick={() => history.push(`/list/${listId}`)}
           >
             Return to list
