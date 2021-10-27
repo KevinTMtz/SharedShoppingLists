@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router';
 
-import ListForm from '../components/ListForm';
+import ListForm from '../../components/List/ListForm';
 
 const EditList = () => {
   const history = useHistory();

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import Button from '../components/Button';
-import ButtonsDiv from '../components/ButtonsDiv';
 
-import ListCell from '../components/ListCell';
+import Button from '../../components/Button/Button';
+import ButtonsDiv from '../../components/Button/ButtonsDiv';
+import ListCell from '../../components/List/ListCell';
 
 const SharedLists = () => {
   const history = useHistory();

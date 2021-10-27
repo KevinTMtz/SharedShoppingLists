@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import SharedLists from './containers/SharedLists';
-import SharedList from './containers/SharedList';
-import CreateList from './containers/CreateList';
-import EditElement from './containers/EditElement';
-import CreateElement from './containers/CreateElement';
-import EditList from './containers/EditList';
+import SharedLists from './containers/List/SharedLists';
+import SharedList from './containers/List/SharedList';
+import CreateList from './containers/List/CreateList';
+import EditList from './containers/List/EditList';
+import EditElement from './containers/Element/EditElement';
+import CreateElement from './containers/Element/CreateElement';
 
 const App = () => {
   return (

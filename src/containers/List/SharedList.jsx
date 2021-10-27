@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
-import Button from '../components/Button';
-import ButtonsDiv from '../components/ButtonsDiv';
-import ListCell from '../components/ListCell';
+import Button from '../../components/Button/Button';
+import ButtonsDiv from '../../components/Button/ButtonsDiv';
+import ListCell from '../../components/List/ListCell';
 
 const SharedList = () => {
   const history = useHistory();
@@ -24,18 +24,28 @@ const SharedList = () => {
     history.push(`/list/${listId}/element/${elementId}`);
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(listId);
+  };
+
   return (
     <div>
-      <h1>{list.listName ?? 'List'}</h1>
+      <h1>{'List'}</h1>
+      <h1>{list.listName}</h1>
+      <p className='list-id' onClick={copyToClipboard}>
+        Click to copy ID
+        <br />
+        {listId}
+      </p>
       <ButtonsDiv>
-        <Button onClick={() => history.push(`/list/${listId}/create-element`)}>
-          Create element
-        </Button>
         <Button
           type='primary'
           onClick={() => history.push(`/edit-list/${listId}`)}
         >
           Edit list
+        </Button>
+        <Button onClick={() => history.push(`/list/${listId}/create-element`)}>
+          Create element
         </Button>
         <Button type='secondary' onClick={() => history.push('/')}>
           Return home

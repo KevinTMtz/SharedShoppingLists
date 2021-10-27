@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router';
 
-import Button from './Button';
-import ButtonsDiv from './ButtonsDiv';
+import Button from '../Button/Button';
+import ButtonsDiv from '../Button/ButtonsDiv';
 
 const ElementForm = (props) => {
   const history = useHistory();
@@ -21,7 +21,7 @@ const ElementForm = (props) => {
       }}
     >
       <input placeholder='List name' required />
-      <input placeholder='List name' type='number' required />
+      <input placeholder='Amount' type='number' required />
       <ButtonsDiv>
         <Button type='submit'>
           {props.isCreating ? 'Create' : 'Update'} element

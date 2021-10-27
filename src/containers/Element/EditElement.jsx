@@ -1,5 +1,5 @@
 import React from 'react';
-import ElementForm from '../components/ElementForm';
+import ElementForm from '../../components/Element/ElementForm';
 
 const EditElement = () => {
   const editElement = async () => {};

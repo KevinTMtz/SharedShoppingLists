@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router';
 
-import Button from './Button';
-import ButtonsDiv from './ButtonsDiv';
+import Button from '../Button/Button';
+import ButtonsDiv from '../Button/ButtonsDiv';
 
 const ListForm = (props) => {
   const history = useHistory();
