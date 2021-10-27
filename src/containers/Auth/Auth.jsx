@@ -7,8 +7,11 @@ import {
 
 import ButtonsDiv from '../../components/Button/ButtonsDiv';
 import Button from '../../components/Button/Button';
+import { useHistory } from 'react-router';
 
 const Auth = () => {
+  const history = useHistory();
+
   const auth = getAuth();
 
   const [button, setButton] = useState(1);
@@ -18,6 +21,7 @@ const Auth = () => {
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then(() => {
         console.log('Login successful');
+        history.push('/');
       })
       .catch((error) => {
         console.log(error.code, error.message);
@@ -28,6 +32,7 @@ const Auth = () => {
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
       .then(() => {
         console.log('Register successful');
+        history.push('/');
       })
       .catch((error) => {
         console.log(error.code, error.message);

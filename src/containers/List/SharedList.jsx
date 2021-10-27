@@ -40,7 +40,7 @@ const SharedList = () => {
         onClick={copyToClipboard}
         style={{ lineHeight: '1.25' }}
       >
-        Click to copy ID
+        Click to copy share ID
         <br />
         <strong>{listId}</strong>
       </p>
@@ -61,10 +61,10 @@ const SharedList = () => {
       <div className='list'>
         {listData.list.map((listElement, index) => (
           <ListCell
-            key={`list-element-${listElement.title}-${index}`}
-            onClick={() => goToElement(listElement.id)}
+            key={`list-element-${listElement.elementName}-${index}`}
+            onClick={() => goToElement(index)}
           >
-            {listElement.title}
+            {listElement.elementName} - Amount: {listElement.elementAmount}
           </ListCell>
         ))}
       </div>

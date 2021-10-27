@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import ListForm from '../../components/List/ListForm';
@@ -10,10 +11,56 @@ const EditList = () => {
 
   const [listName, setListName] = useState('');
 
+  useEffect(() => {
+    axios
+      .get(
+        `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+      )
+      .then((result) => {
+        setListName(result.data.listName);
+      })
+      .catch((error) => console.log(error));
+  }, [listId]);
+
   const editList = async () => {
-    history.push({
-      pathname: `/list/${listId}`,
-    });
+    await axios
+      .get(
+        `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+      )
+      .then((result) => {
+        const newListData = {
+          ...result.data,
+          listName: listName,
+        };
+
+        axios
+          .put(
+            `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+            {
+              ...newListData,
+            },
+          )
+          .then((response) => {
+            history.push(`/list/${listId}`);
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const deleteList = async () => {
+    await axios
+      .delete(
+        `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+      )
+      .then(() => {
+        console.log('Delete list successful');
+
+        history.push({
+          pathname: '/',
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -24,6 +71,7 @@ const EditList = () => {
         setListName={setListName}
         isCreating={false}
         onSubmit={editList}
+        onDelete={deleteList}
       />
     </div>
   );

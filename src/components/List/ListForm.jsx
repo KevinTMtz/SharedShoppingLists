@@ -19,24 +19,35 @@ const ListForm = (props) => {
       <input
         placeholder='List name'
         required
-        value={props.value}
+        value={props.listName}
         onChange={(event) => props.setListName(event.target.value)}
       />
       <ButtonsDiv>
         <Button type='submit'>
-          {props.isCreating ? 'Create' : 'Update'} list
+          {props.isCreating ? 'Create list' : 'Update list name'}
         </Button>
         {props.isCreating ? (
           <Button className='secondary' onClick={() => history.push('/')}>
             Return home
           </Button>
         ) : (
-          <Button
-            className='secondary'
-            onClick={() => history.push(`/list/${listId}`)}
-          >
-            Return to list
-          </Button>
+          <>
+            <Button
+              className='danger'
+              onClick={(event) => {
+                event.preventDefault();
+                props.onDelete();
+              }}
+            >
+              Delete list
+            </Button>
+            <Button
+              className='secondary'
+              onClick={() => history.push(`/list/${listId}`)}
+            >
+              Return to list
+            </Button>
+          </>
         )}
       </ButtonsDiv>
     </form>

@@ -14,25 +14,33 @@ const CreateList = () => {
   const [listName, setListName] = useState('');
 
   const createList = async () => {
-    axios
+    await axios
       .post('https://sharedlist-d718d-default-rtdb.firebaseio.com/lists.json', {
         listName: listName,
         list: [],
       })
       .then((response) => {
         axios
-          .post(
+          .get(
             `https://sharedlist-d718d-default-rtdb.firebaseio.com/usersLists/${user.uid}.json`,
-            {
-              lists: [response.data.name],
-            },
           )
-          .then((response) => {
-            console.log(response.data.name);
-
-            history.push({
-              pathname: '/',
-            });
+          .then((usersListsData) => {
+            axios
+              .put(
+                `https://sharedlist-d718d-default-rtdb.firebaseio.com/usersLists/${user.uid}.json`,
+                {
+                  lists: [
+                    ...(usersListsData.data?.lists ?? []),
+                    response.data.name,
+                  ],
+                },
+              )
+              .then((response) => {
+                history.push({
+                  pathname: '/',
+                });
+              })
+              .catch((error) => console.log(error));
           })
           .catch((error) => console.log(error));
       })

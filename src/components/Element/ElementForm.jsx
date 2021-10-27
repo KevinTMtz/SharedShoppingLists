@@ -15,22 +15,51 @@ const ElementForm = (props) => {
         event.preventDefault();
         await props.onSubmit();
 
-        history.push({
-          pathname: '/',
-        });
+        history.push(`/list/${listId}`);
       }}
     >
-      <input placeholder='List name' required />
-      <input placeholder='Amount' type='number' required />
+      <input
+        placeholder='Item name'
+        required
+        value={props.element.elementName}
+        onChange={(event) =>
+          props.setElement({
+            ...props.element,
+            elementName: event.target.value,
+          })
+        }
+      />
+      <input
+        placeholder='Amount'
+        required
+        value={props.element.elementAmount}
+        onChange={(event) =>
+          props.setElement({
+            ...props.element,
+            elementAmount: event.target.value,
+          })
+        }
+      />
       <ButtonsDiv>
         <Button type='submit'>
-          {props.isCreating ? 'Create' : 'Update'} element
+          {props.isCreating ? 'Create' : 'Update'} item
         </Button>
+        {!props.isCreating && (
+          <Button
+            className='danger'
+            onClick={(event) => {
+              event.preventDefault();
+              props.onDelete();
+            }}
+          >
+            Delete element
+          </Button>
+        )}
         <Button
           className='secondary'
           onClick={() => history.push(`/list/${listId}`)}
         >
-          Cancel {props.isCreating ? 'create' : 'update'} element
+          Cancel {props.isCreating ? 'create' : 'update'} item
         </Button>
       </ButtonsDiv>
     </form>

@@ -16,16 +16,15 @@ const App = () => {
 
   return (
     <div className='App'>
-      {user ? <Redirect to='/' /> : <Redirect to='/auth' />}
       {!user ? (
         <Switch>
-          <Route path='/auth' exact>
+          <Route path='/'>
             <Auth />
           </Route>
         </Switch>
       ) : (
         <Switch>
-          <Route path='/' exact>
+          <Route path='/lists' exact>
             <SharedLists />
           </Route>
           <Route path='/list/:listId' exact>
@@ -43,6 +42,7 @@ const App = () => {
           <Route path='/list/:listId/element/:elementId' exact>
             <EditElement />
           </Route>
+          <Redirect to='/lists' />
         </Switch>
       )}
     </div>
