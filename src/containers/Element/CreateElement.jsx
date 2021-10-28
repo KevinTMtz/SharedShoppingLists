@@ -10,6 +10,7 @@ const CreateElement = () => {
   const [element, setElement] = useState({
     elementName: '',
     elementAmount: '',
+    checked: false,
   });
 
   const createElement = async () => {

@@ -14,9 +14,7 @@ const SharedLists = () => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
 
-  const [lists, setLists] = useState({
-    listID: { listName: 'List Name', list: [] },
-  });
+  const [lists, setLists] = useState({});
 
   useEffect(
     () =>

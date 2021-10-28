@@ -24,6 +24,39 @@ const SharedList = () => {
       .catch((error) => console.log(error));
   }, [listId]);
 
+  const onChangeCheckbox = async (itemIndex) => {
+    await axios
+      .get(
+        `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+      )
+      .then(async (result) => {
+        const newListData = {
+          ...result.data,
+          list: [...(result.data.list ?? [])],
+        };
+
+        newListData.list[itemIndex] = {
+          ...newListData.list[itemIndex],
+          checked: !newListData.list[itemIndex].checked,
+        };
+
+        setListData(newListData);
+
+        await axios
+          .put(
+            `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
+            {
+              ...newListData,
+            },
+          )
+          .then((response) => {
+            console.log('Update element successful');
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+  };
+
   const goToElement = (elementId) => {
     history.push(`/list/${listId}/element/${elementId}`);
   };
@@ -63,6 +96,9 @@ const SharedList = () => {
           <ListCell
             key={`list-element-${listElement.elementName}-${index}`}
             onClick={() => goToElement(index)}
+            hasCheckbox={true}
+            onChangeCheckbox={() => onChangeCheckbox(index)}
+            checked={listElement.checked}
           >
             {listElement.elementName} - Amount: {listElement.elementAmount}
           </ListCell>
