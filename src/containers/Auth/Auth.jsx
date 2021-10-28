@@ -18,7 +18,7 @@ const Auth = () => {
   const [userData, setUserData] = useState({ email: '', password: '' });
 
   const login = async () => {
-    signInWithEmailAndPassword(auth, userData.email, userData.password)
+    await signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then(() => {
         console.log('Login successful');
         history.push('/');
@@ -29,7 +29,11 @@ const Auth = () => {
   };
 
   const register = async () => {
-    createUserWithEmailAndPassword(auth, userData.email, userData.password)
+    await createUserWithEmailAndPassword(
+      auth,
+      userData.email,
+      userData.password,
+    )
       .then(() => {
         console.log('Register successful');
         history.push('/');

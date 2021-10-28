@@ -18,13 +18,13 @@ const CreateElement = () => {
       .get(
         `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
       )
-      .then((result) => {
+      .then(async (result) => {
         const newListData = {
           ...result.data,
           list: [...(result.data.list ?? []), element],
         };
 
-        axios
+        await axios
           .put(
             `https://sharedlist-d718d-default-rtdb.firebaseio.com/lists/${listId}.json`,
             {

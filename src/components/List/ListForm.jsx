@@ -38,9 +38,9 @@ const ListForm = (props) => {
           <>
             <Button
               className='danger'
-              onClick={(event) => {
+              onClick={async (event) => {
                 event.preventDefault();
-                props.onDelete();
+                await props.onDelete();
               }}
             >
               Delete list

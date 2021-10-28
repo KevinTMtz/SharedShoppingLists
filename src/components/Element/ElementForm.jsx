@@ -47,9 +47,9 @@ const ElementForm = (props) => {
         {!props.isCreating && (
           <Button
             className='danger'
-            onClick={(event) => {
+            onClick={async (event) => {
               event.preventDefault();
-              props.onDelete();
+              await props.onDelete();
             }}
           >
             Delete element

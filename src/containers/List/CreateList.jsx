@@ -20,13 +20,13 @@ const CreateList = () => {
         listName: listName,
         list: [],
       })
-      .then((response) => {
-        axios
+      .then(async (response) => {
+        await axios
           .get(
             `https://sharedlist-d718d-default-rtdb.firebaseio.com/usersLists/${user.uid}.json`,
           )
-          .then((usersListsData) => {
-            axios
+          .then(async (usersListsData) => {
+            await axios
               .put(
                 `https://sharedlist-d718d-default-rtdb.firebaseio.com/usersLists/${user.uid}.json`,
                 {
